@@ -1,0 +1,88 @@
+/* Font Libaray */
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@200;400;800&family=Poppins&family=Quicksand:wght@500&family=Raleway:wght@200;400;500&family=Titillium+Web&display=swap');
+
+
+* {
+  box-sizing: border-box;
+}
+.App {
+  text-align: center;
+}
+
+/***************************** HEADER *********************************************/
+.App-header {
+  /* 
+    I Was thinking it would be cool to have a photo of a victoria view
+    Could also make this a  bootstrap carousel.
+  */
+  background-image: url(images/coast.jpg);
+  background-position:center top;
+  background-size: 100%;
+  width: 100%;
+  align-items: center; 
+  justify-content: center; 
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
+  padding: 7px;
+}
+.Header-text{
+  font-size:1.8vw;
+  font-weight: regular;
+  text-shadow: 0px 3px 5px #000000;
+  
+  line-height: 80%;
+
+
+  /* font-family: 'Exo', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Quicksand', sans-serif; */
+  /*font-family: 'Raleway', sans-serif;*/
+  /* font-family: 'Titillium Web', sans-serif; */
+}
+
+.jumbo {
+  width: 99%;
+  align-items: center; 
+  justify-content: center; 
+  background: #0e2e61ad  !important;
+  margin: 20px auto auto auto;
+}
+
+/*************** LOGOS ********/
+.Logos{
+  background-color: white;
+  width: 15.5%;
+  margin: auto;
+  box-shadow: 0px 3px 8px 1px #0C0343;
+  border-radius: 5px;
+}
+
+.Checkfront-logo{
+  width: 50%;
+  padding: 10px;
+  background-color: white;
+}
+.Camosun-logo{
+  width: 50%;
+  padding: 10px;
+  background-color: white;
+}
+/**************** logo end *****************/
+/**************** header end ***********************************************************/
+
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+

@@ -1,0 +1,13 @@
+.icon {
+  color: white !important;
+  margin: 30px 10px 0px 10px;
+  
+}
+
+.icon:hover {
+  color: #d0d0d0da !important;
+}
+
+.photo {
+  margin: 20px auto auto auto;
+}
