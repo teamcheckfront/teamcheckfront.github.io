@@ -197,7 +197,7 @@ class AboutUs extends Component {
               <a className="icon" href="mailto:sakandola@hotmail.com"><Mail /></a>
             </div>
             <div style={AboutUs.BLOCK_CARD_STYLE}>
-              <Image className="photo" src="natasha.jpg" alt="Natasha" height="300px" rounded/>
+              <Image className="photo" src="natasha.jpeg" alt="Natasha" height="300px" rounded/>
               <h3>Natasha Bains</h3>
               <p>
                 Natasha has always valued a strong commitment to implementing quality code and adapting to any given situation.

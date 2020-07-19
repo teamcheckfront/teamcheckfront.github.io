@@ -30,7 +30,7 @@ function Details() {
       <Figure className="photo">
         <Figure.Image
           alt="UI mockup for csv import"
-          src="figma_import.jpg"
+          src="figma_import.jpeg"
           rounded
           fluid
         />
@@ -41,7 +41,7 @@ function Details() {
       <Figure className="photo">
         <Figure.Image
           alt="UI mockup for item mapping"
-          src="figma_item.jpg"
+          src="figma_item.jpeg"
           rounded
           fluid
         />
