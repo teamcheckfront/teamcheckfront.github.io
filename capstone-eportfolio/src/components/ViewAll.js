@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import './PDF.css';
 import './ViewAll.css';
 
@@ -9,7 +9,7 @@ function ViewAll() {
   return (
     <div>
       <br></br>
-      <Link to="/sample.pdf" target="_blank" className="link" download style={{color:"#366fc9"}}>Download All Reports</Link>
+      <HashRouter path="/sample.pdf" target="_blank" className="link" download style={{color:"#366fc9"}}>Download All Reports</HashRouter>
       <p className="space"> </p>
     </div>
   );
