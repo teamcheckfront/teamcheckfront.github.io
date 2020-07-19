@@ -9,7 +9,7 @@ function ViewAll() {
   return (
     <div>
       <br></br>
-      <Link to={process.env.PUBLIC_URL + '/sample.pdf'} target="_blank" className="link" download style={{color:"#366fc9"}}>Download All Reports</Link>
+      <Link to={process.env.PUBLIC_URL + "/sample.pdf"} target="_blank" className="link" download style={{color:"#366fc9"}}>Download All Reports</Link>
       <p className="space"> </p>
     </div>
   );
