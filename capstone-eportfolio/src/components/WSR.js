@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Document, Page, pdfjs} from 'react-pdf';
-import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import './PDF.css';
@@ -35,7 +34,7 @@ class WSR extends Component {
     return (
       <div className="document">
         <h3>Weekly Status Reports</h3>
-        <Link to="/PDFs/WSR.pdf" target="_blank" className="link" download style={{color:"#366fc9"}}>Download Weekly Status Reports</Link>
+        <a href="/PDFs/WSR.pdf" target="_blank" className="link" download style={{color:"#366fc9"}}>Download Weekly Status Reports</a>
         <Alert variant="secondary" style={{margin:"10px auto 10px auto"}}>
           <Button class="theButton" variant="outline-secondary" onClick={this.goToPrevPage}>Prev</Button>{' '}
           <Button class="theButton" variant="outline-secondary" onClick={this.goToNextPage}>Next</Button>{' '}

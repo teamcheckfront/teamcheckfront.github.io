@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Document, Page, pdfjs} from 'react-pdf';
-import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import './PDF.css';
@@ -34,7 +33,7 @@ class RetrospectiveMeetings extends Component {
     return (
       <div>
         <h3>Retrospective Meetings</h3>
-        <Link to="/PDFs/RetropectiveMeetings.pdf" className="link" target="_blank" download style={{color:"#366fc9"}}>Download Retrospective Meeting Reports</Link>
+        <a href="/PDFs/RetropectiveMeetings.pdf" className="link" target="_blank" download style={{color:"#366fc9"}}>Download Retrospective Meeting Reports</a>
         <Alert variant="secondary" style={{margin:"10px auto 10px auto"}}>
           <Button class="theButton" variant="outline-secondary" onClick={this.goToPrevPage}>Prev</Button>{' '}
           <Button class="theButton" variant="outline-secondary" onClick={this.goToNextPage}>Next</Button>{' '}
