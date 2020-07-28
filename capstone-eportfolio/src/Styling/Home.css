@@ -12,8 +12,14 @@
   background-size: 100%;
 }
 
+.homeHeader{
+  color: #191E1F;
+}
 .buzzword{
   color: #366fc9;
   font-weight: bold;
   font-size: 28px;
+}
+.MDBrow{
+  text-align: justify;
 }
