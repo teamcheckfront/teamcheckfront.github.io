@@ -13,6 +13,8 @@ function Details() {
         NCDI system benefits both customers (by an improved introductory experience)
          and Checkfront staff (by saving time and resources). 
       </p>
+      <img className=" detailsPic" src="placeholder.jpg" alt="Matchings? map? mapping?"></img>
+
       <p className="desc">
         The NCDI system validates, transforms, and integrates customer booking data into Checkfront’s 
         system automatically. The application maps client data to Checkfront’s corresponding items and adjusts
