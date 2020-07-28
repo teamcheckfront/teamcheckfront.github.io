@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header.js'
-import './Home.css';
+import '../Styling/Home.css';
 
 // home component
 const Home = () => {
@@ -14,6 +14,7 @@ const Home = () => {
           and fairly priced. The company’s primary goal is to enable clients to focus on products and 
           experiences rather than bookings.    
       </p>
+      <img className=" homePic" src="placeholder.jpg" alt="Description"></img>
       <p className="desc">  
         Acting on this initiative, our project sponsors, Robert McMynn
            and Stefanie Warren, created the NCDI project. At Checkfront, Robert is an implementation 
@@ -21,6 +22,7 @@ const Home = () => {
            Checkfront developers, such as Jason Michael, have given this project and our team their full
             support.
       </p>
+      <img className=" homePic" src="placeholder.jpg" alt="Description"></img>
       <p className="desc">
         Checkfront frequently works with new clients who need to transfer existing booking data into 
         Checkfront’s system. Often, this data is incompatible with Checkfront’s system and cannot go through
@@ -29,6 +31,8 @@ const Home = () => {
           past, a custom script was developed based on a specific incompatible data set. However, it was time-consuming 
           to develop and is not feasible to do for every client. 
       </p>
+      <img className=" homePic" src="placeholder.jpg" alt="Description"></img>
+
       <p className="desc">
         The aptly-named Team Checkfront, consisting of Samreeta (Sam), Roman, and 
          Natasha, has partnered with Checkfront to provide a New Customer Data Importation (NCDI) system as a 

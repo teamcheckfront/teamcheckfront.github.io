@@ -1,9 +1,10 @@
 /* Font Libaray */
-@import url('https://fonts.googleapis.com/css2?family=Exo:wght@200;400;800&family=Poppins&family=Quicksand:wght@500&family=Raleway:wght@200;400;500&family=Titillium+Web&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 * {
   box-sizing: border-box;
+  font-family: 'Poppins';
+  font-weight: 700px;
+  font-style: normal;
 }
 .App {
   text-align: center;
@@ -15,7 +16,7 @@
     I Was thinking it would be cool to have a photo of a victoria view
     Could also make this a  bootstrap carousel.
   */
-  background-image: url(images/coast.jpg);
+  background-image: url(../images/boat.jpg);
   background-position:center top;
   background-size: 100%;
   width: 100%;
@@ -28,7 +29,7 @@
 .Header-text{
   font-size:1.8vw;
   font-weight: regular;
-  text-shadow: 0px 3px 5px #000000;
+  text-shadow: 0px 3px 8px #1b0236;
   
   line-height: 80%;
 
@@ -44,7 +45,7 @@
   width: 99%;
   align-items: center; 
   justify-content: center; 
-  background: #0e2e61ad  !important;
+  background:transparent  !important;
   margin: 20px auto auto auto;
 }
 
@@ -68,12 +69,12 @@
   background-color: white;
 }
 /**************** logo end *****************/
-/**************** header end ***********************************************************/
 
 
 .App-link {
   color: #61dafb;
 }
+
 
 @keyframes App-logo-spin {
   from {

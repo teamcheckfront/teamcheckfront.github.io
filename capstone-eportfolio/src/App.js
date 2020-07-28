@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Styling/App.css';
 import {
   HashRouter as Router,
   Switch,
@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <NavigationBar />
+        <NavigationBar/>
         <Switch>
           <Route path="/details" component={Details} />
           <Route path="/aboutus" component={AboutUs}/>

@@ -1,0 +1,13 @@
+.desc {
+  padding: 20px 30px 10px 30px;
+  margin: 20px 30px 20px 30px;
+  text-align: justify;
+  display: block;
+}
+
+.homePic{
+  background-image: url(../images/boat.jpg);
+  width:40px;
+  height:60px;
+  background-size: 100%;
+}

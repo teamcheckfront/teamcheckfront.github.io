@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Document, Page, pdfjs} from 'react-pdf';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import './PDF.css';
+import '../Styling/PDF.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Details.css';
+import '../Styling/Details.css';
 import Figure from 'react-bootstrap/Figure';
 
 // meeting notes component
