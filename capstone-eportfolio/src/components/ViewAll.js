@@ -1,6 +1,6 @@
 import React from 'react';
-import './PDF.css';
-import './ViewAll.css';
+import '../Styling/PDF.css';
+import '../Styling/ViewAll.css';
 
 // secure documents components
 // should only be accessible if logged in

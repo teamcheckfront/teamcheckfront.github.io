@@ -13,6 +13,8 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import { NavLink as RRNavLink } from 'react-router-dom';
+import '../Styling/Navbar.css'
+
 
 // Navigation bar component
 const NavigationBar = (props) => {
@@ -23,7 +25,7 @@ const NavigationBar = (props) => {
   return (
     <div>
       <a href="/" name="top"></a>
-      <Navbar  color="light" light className="nav" expand="md">
+      <Navbar  light className="nav" expand="md">
         <NavbarBrand href="/"> NCDI  </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

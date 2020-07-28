@@ -1,0 +1,25 @@
+.desc {
+  padding: 20px 30px 10px 30px;
+  margin: 20px 30px 20px 30px;
+  text-align: justify;
+  display: block;
+}
+
+.homePic{
+  background-image: url(../images/boat.jpg);
+  width:40px;
+  height:60px;
+  background-size: 100%;
+}
+
+.homeHeader{
+  color: #191E1F;
+}
+.buzzword{
+  color: #366fc9;
+  font-weight: bold;
+  font-size: 28px;
+}
+.MDBrow{
+  text-align: justify;
+}

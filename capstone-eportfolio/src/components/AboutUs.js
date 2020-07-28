@@ -3,7 +3,7 @@ import ReactCardCarousel from "react-card-carousel";
 import Image from "react-bootstrap/Image";
 import LinkedIn from "react-feather/dist/icons/linkedin";
 import Mail from "react-feather/dist/icons/mail";
-import './AboutUs.css';
+import '../Styling/AboutUs.css'
 
 class AboutUs extends Component {
 

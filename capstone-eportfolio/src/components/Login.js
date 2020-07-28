@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import "./Login.css";
+import "../Styling/Login.css";
 import SessionInfo from './SessionInfo.js';
 
 export default function Login({setLog}) {
   const [password, setPassword] = useState("");
   //the passwrd the user needs to get right
-  const correctPW = "test";
+  const correctPW = "SRNics2020";
 
   // the login button is disabled until there are at least 3 
   // chars typed into the password field

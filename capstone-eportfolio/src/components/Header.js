@@ -7,7 +7,7 @@ const Header = () => {
   <header className="App-header">
     <Jumbotron className="jumbo">
       <Container className="Header-text">
-        <h2>New Customer Data Importation System</h2>
+        <h1>New Customer Data Importation System</h1>
         <h5>
           Information and Computer System Technology Capstone 2020
         </h5>
