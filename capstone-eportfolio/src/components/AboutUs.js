@@ -3,6 +3,7 @@ import ReactCardCarousel from "react-card-carousel";
 import Image from "react-bootstrap/Image";
 import LinkedIn from "react-feather/dist/icons/linkedin";
 import Mail from "react-feather/dist/icons/mail";
+import Tooltip from '@material-ui/core/Tooltip';
 import '../Styling/AboutUs.css'
 
 class AboutUs extends Component {
@@ -42,7 +43,7 @@ class AboutUs extends Component {
       textAlign: "center",
       background: "#254d8c",
       color: "#FFF",
-      fontSize: "18px",
+      fontSize: "15px",
       borderRadius: "8px",
       boxSizing: "border-box",
       margin: "auto",
@@ -52,7 +53,7 @@ class AboutUs extends Component {
   // style for card on mobile or tablet
   static get BLOCK_CARD_STYLE() {
       return {
-        height: "650px",
+        height: "auto",
         width: "450px",
         paddingTop: "30px",
         padding: "10px",
@@ -68,27 +69,27 @@ class AboutUs extends Component {
   }
 
   
-  // Style for the p tags
-  static get P_BOTTOM_STYLE() {
-    return {
-      padding:"9em 2em 0em",
-      margin: "auto",
-      textAlign: "justify" ,
-      fontSize: "20px",
-      display: "block"
-    }
-  }
+ 
   // Style for the p tags
   static get P_TOP_STYLE() {
     return {
-      padding:"4em 2em 6em",
+      padding:"2em 2em 2em",
       margin: "auto",
       textAlign: "justify" ,
       fontSize: "20px",
       display: "block"
     }
   }
-
+ // Style for the p tags
+ static get P_BOTTOM_STYLE() {
+  return {
+    padding:"4em 2em 0em",
+    margin: "auto",
+    textAlign: "justify" ,
+    fontSize: "20px",
+    display: "block"
+  }
+}
 
   // -- CLASS FUNCTIONS --
   // constructor
@@ -140,9 +141,12 @@ class AboutUs extends Component {
                    soft and technical skills, Sam looks forward to becoming an indispensable software developer and eventually
                     a project manager.
                 </p>
-                <br/>
                 <a className="icon" href="https://www.linkedin.com/in/samreeta-kandola/" target="_blank" rel="noopener noreferrer"><LinkedIn /></a>
-                <a className="icon" href="mailto:sakandola@hotmail.com" ><Mail /></a>
+                <Tooltip title="sakandola@hotmail.com" interactive>
+                  <a className="icon" href="mailto:sakandola@hotmail.com" ><Mail /></a>
+                </Tooltip>
+                <br/>
+                <br/>
               </div>
               <div style={AboutUs.CARD_STYLE}>
                 <Image className="photo" src="natasha.jpeg" alt="Natasha" height="300px" rounded/>
@@ -154,9 +158,12 @@ class AboutUs extends Component {
                    ignited an appreciation for aspects of software engineering that prioritize user experience. Natasha is 
                    excited to pursue her interests and explore new challenges.
                 </p>
-                <br/>
                 <a className="icon" href="https://www.linkedin.com/in/natasha-bains-478831a4/" target="_blank" rel="noopener noreferrer"><LinkedIn /></a>
+                <Tooltip title="natasha.a.bains@gmail.com" interactive>
                 <a className="icon" href="mailto:natasha.a.bains@gmail.com"><Mail /></a>
+                </Tooltip>
+                <br/>
+                <br/>
               </div>
               <div style={AboutUs.CARD_STYLE}>
                 <Image className="photo" src="roman.png" alt="Roman" height="300px" rounded/>
@@ -168,9 +175,12 @@ class AboutUs extends Component {
                    projects. Wanting to further his knowledge and skill set, Roman went back to school as a married father of 
                    three. He looks forward to using his skills to help others connect and create through technology.
                 </p>
-                <br/>
                 <a className="icon" href="https://www.linkedin.com/in/romansityayev/" target="_blank" rel="noopener noreferrer"><LinkedIn /></a>
-                <a className="icon" href="mailto:romansityyev@gmail.com"><Mail /></a>
+                <Tooltip title="romansityyev@gmail.com" interactive>
+                  <a className="icon" href="mailto:romansityyev@gmail.com"><Mail /></a>
+                </Tooltip>
+                <br/>
+                <br/>
               </div>
             </ReactCardCarousel>
           </div>
@@ -205,9 +215,10 @@ class AboutUs extends Component {
                 soft and technical skills, Sam looks forward to becoming an indispensable software developer and eventually
                 a project manager.
               </p>
-              <br/>
               <a className="icon" href="https://www.linkedin.com/in/samreeta-kandola/" target="_blank" rel="noopener noreferrer"><LinkedIn /></a>
               <a className="icon" href="mailto:sakandola@hotmail.com"><Mail /></a>
+              <br/>
+              <br/>
             </div>
             <div style={AboutUs.BLOCK_CARD_STYLE}>
               <Image className="photo" src="natasha.jpeg" alt="Natasha" height="300px" rounded/>
@@ -219,9 +230,10 @@ class AboutUs extends Component {
                 ignited an appreciation for aspects of software engineering that prioritize user experience. Natasha is 
                 excited to pursue her interests and explore new challenges.
               </p>
-              <br/>
               <a className="icon" href="https://www.linkedin.com/in/natasha-bains-478831a4/" target="_blank" rel="noopener noreferrer"><LinkedIn/></a>
               <a className="icon" href="mailto:natasha.a.bains@gmail.com"><Mail/></a>
+              <br/>
+              <br/>
             </div>
             <div style={AboutUs.BLOCK_CARD_STYLE}>
               <Image className="photo" src="roman.png" alt="Roman" height="300px" rounded/>
@@ -233,9 +245,10 @@ class AboutUs extends Component {
                 projects. Wanting to further his knowledge and skill set, Roman went back to school as a married father of 
                 three. He looks forward to using his skills to help others connect and create through technology.
               </p>
-              <br/>
               <a className="icon" href="https://www.linkedin.com/in/romansityayev/" target="_blank" rel="noopener noreferrer"><LinkedIn /></a>
               <a className="icon" href="mailto:romansityayev@gmail.com"><Mail /></a>
+              <br/>
+              <br/>
             </div>
           </div>
         <p style={AboutUs.P_BOTTOM_STYLE}>

@@ -12,7 +12,6 @@ const Home = () => {
 
         <MDBRow>
         <MDBCol>
-          <h2 className="homeHeader">Our Sponsors</h2>
             <p className="desc text-justify"> 
               Checkfront is a tenured supporter of Camosun College’s Capstone program and has presented another
               unique challenge for this year. Checkfront is a local, home-grown online booking management 
