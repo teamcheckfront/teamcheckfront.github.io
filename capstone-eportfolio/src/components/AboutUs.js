@@ -17,6 +17,7 @@ class AboutUs extends Component {
       display: "block",
       justifyContent: "center",
       alignItems: "middle"
+      
     };
   }
   // style for container on mobile/tablets
@@ -34,14 +35,14 @@ class AboutUs extends Component {
   // Style for the card
   static get CARD_STYLE() {
     return {
-      height: "600px",
+      height: "auto",
       width: "500px",
-      paddingTop: "30px",
+      paddingTop: "500px",
       padding: "10px",
       textAlign: "center",
       background: "#254d8c",
       color: "#FFF",
-      fontSize: "13px",
+      fontSize: "18px",
       borderRadius: "8px",
       boxSizing: "border-box",
       margin: "auto",
@@ -66,16 +67,28 @@ class AboutUs extends Component {
       }
   }
 
+  
   // Style for the p tags
-  static get P_STYLE() {
+  static get P_BOTTOM_STYLE() {
     return {
-      padding: "10px",
-      margin: "10px",
-      textAlign: "center",
-      fontSize: "15px",
+      padding:"9em 2em 0em",
+      margin: "auto",
+      textAlign: "justify" ,
+      fontSize: "20px",
       display: "block"
     }
   }
+  // Style for the p tags
+  static get P_TOP_STYLE() {
+    return {
+      padding:"4em 2em 6em",
+      margin: "auto",
+      textAlign: "justify" ,
+      fontSize: "20px",
+      display: "block"
+    }
+  }
+
 
   // -- CLASS FUNCTIONS --
   // constructor
@@ -107,8 +120,8 @@ class AboutUs extends Component {
     if(isDesktop) {
       // if it's a desktop render the carousel
       return (
-        <div>
-          <p style={AboutUs.P_STYLE}>
+        <div >
+          <p  style={AboutUs.P_TOP_STYLE} >
             The team members have contributed equally to the success of this project. All members have the role of a 
             full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 
             project manager. She keeps the group on task and organized. Natasha acts as the liaison between the project sponsors
@@ -161,7 +174,7 @@ class AboutUs extends Component {
               </div>
             </ReactCardCarousel>
           </div>
-          <p style={AboutUs.P_STYLE}>
+          <p style={AboutUs.P_BOTTOM_STYLE }>
             Team Checkfront would like to thank their project sponsors Robert McMynn and Stefanie Warren for making this opportunity
              possible. They appreciate all of the encouragement and support Jason Michael and the other Checkfront staff have given 
              their team. They would also like to recognize the continued education and guidance Saryta Schaerer and the ICS faculty 
@@ -174,7 +187,7 @@ class AboutUs extends Component {
       // it's not a desktop -- render individual cards
       return (
         <div>
-          <p style={AboutUs.P_STYLE}>
+          <p style={AboutUs.P_TOP_STYLE}>
             The team members have contributed equally to the success of this project. All members have the role of a 
             full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 
             project manager. She keeps the group on task and organized. Natasha acts as the liaison between the project sponsors
@@ -225,7 +238,7 @@ class AboutUs extends Component {
               <a className="icon" href="mailto:romansityayev@gmail.com"><Mail /></a>
             </div>
           </div>
-        <p style={AboutUs.P_STYLE}>
+        <p style={AboutUs.P_BOTTOM_STYLE}>
           Team Checkfront would like to thank their project sponsors Robert McMynn and Stefanie Warren for making this opportunity
            possible. They appreciate all of the encouragement and support Jason Michael and the other Checkfront staff have given 
            their team. They would also like to recognize the continued education and guidance Saryta Schaerer and the ICS faculty 
