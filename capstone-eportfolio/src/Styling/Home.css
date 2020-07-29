@@ -18,7 +18,8 @@
 .buzzword{
   color: #366fc9;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 28px; 
+  text-align: center
 }
 .MDBrow{
   text-align: justify;

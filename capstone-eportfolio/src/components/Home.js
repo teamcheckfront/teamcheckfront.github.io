@@ -20,13 +20,12 @@ const Home = () => {
                 and fairly priced. The company’s primary goal is to enable clients to focus on products and 
                 experiences rather than bookings.    
             </p>
+            <p  className="buzzword text-center"> "One Booking Platform, Limitless Possibilities"</p>
+
           </MDBCol>
         </MDBRow>
 
         <MDBRow>
-          <div className="buzzword">
-            <p className="desc text-center"> "One Booking Platform, Limitless Possibilities"</p>
-          </div>
         </MDBRow>
 
         <MDBRow>
