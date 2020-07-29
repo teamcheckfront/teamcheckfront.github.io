@@ -13,7 +13,7 @@ const Header = () => {
         </h5>
       </Container>
       <br></br>
-      <Container className="Logos" rounded>
+      <Container className="Logos" fluid="md" rounded>
       <a href="https://www.checkfront.com/" target="_blank" rel="noopener noreferrer">
         <img src="/checkfront_logo.jpg" className="Checkfront-logo" alt="checkfront-logo" />
       </a>

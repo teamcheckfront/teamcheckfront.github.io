@@ -30,15 +30,15 @@
   font-size:1.8vw;
   font-weight: regular;
   text-shadow: 0px 3px 8px #1b0236;
-  
   line-height: 80%;
 
-
-  /* font-family: 'Exo', sans-serif;
+  /* 
+  font-family: 'Exo', sans-serif;
   font-family: 'Poppins', sans-serif;
-  font-family: 'Quicksand', sans-serif; */
-  /*font-family: 'Raleway', sans-serif;*/
-  /* font-family: 'Titillium Web', sans-serif; */
+  font-family: 'Quicksand', sans-serif; 
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Titillium Web', sans-serif; 
+  */
 }
 
 .jumbo {

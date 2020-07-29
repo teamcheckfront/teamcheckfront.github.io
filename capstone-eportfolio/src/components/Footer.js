@@ -22,9 +22,11 @@ const Footer = () => {
     <MDBFooter className="footer">
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow>
-          <MDBCol md="4">
-            <h5 className="title">NCDI System</h5>
-            <p>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+          <MDBCol className="territory" md="4">
+            <h5 className="title">Territorial Acknowledgement</h5>
+            <p>
+              Camosun College is located on the Traditional Territories of the Lekwungen and W̱SÁNEĆ peoples. We acknowledge their welcome and graciousness to the students who seek knowledge here.
+            </p>
           </MDBCol>
           <MDBCol md="3">
             <h5 className="title">Affiliations</h5>
@@ -74,9 +76,9 @@ const Footer = () => {
                   </li>
                 </ul>
           </MDBCol>
-          <Col float-right>
+          <MDBCol float-right>
             <Button className="top" href="#top" variant='outline-secondary' size="sm" style={{ backgroundColor:"#dfe6f5", color:"#366fc9" }}>TOP</Button>
-          </Col>
+          </MDBCol>
         </MDBRow>
       </MDBContainer>
       <div className="footer-copyright text-center py-3">

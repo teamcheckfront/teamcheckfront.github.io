@@ -21,6 +21,7 @@
   right: 0;
   padding-top: 15px;
   padding-bottom: 5px;
+  
 }
 
 /* ///////////////////////////////////// LISTS ////////////////////////// */
@@ -64,6 +65,13 @@ a:visited {
 /* When the top of page button has been clicked  */
 .top:hover{
   background-color: #c8cddb !important;
+}
+
+.territory p{
+  color: #c9c5f5 !important;
+  font-size: x-small;
+  text-align: justify;
+  padding-right: 15%;
 }
 
 /* /////////////////////////////////// COPYRIGHT ///////////////////// */
