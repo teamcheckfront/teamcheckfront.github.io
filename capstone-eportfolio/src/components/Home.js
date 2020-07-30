@@ -27,11 +27,11 @@ const Home = () => {
 
 
           <MDBRow center>
-            <MDBCol>
+          <MDBCol size="6">
               <Image className="homePicture" src="desertTour.jpeg" alt="camel ride" rounded />
             </MDBCol>
 
-            <MDBCol>
+            <MDBCol size="6">
               <p className="desc">  
                 Acting on this initiative, our project sponsors, Robert McMynn and Stefanie Warren, created the NCDI project. At Checkfront, Robert is an implementation 
                 specialist, and Stefanie is a customer success manager. The project sponsors along with 
@@ -44,7 +44,7 @@ const Home = () => {
 
 
           <MDBRow around >
-            <MDBCol>
+          <MDBCol size="6">
               <p className="desc">
                 Checkfront frequently works with new clients who need to transfer existing booking data into 
                 Checkfront’s system. Often, this data is incompatible with Checkfront’s system and cannot go through
@@ -77,6 +77,7 @@ const Home = () => {
               <Image className="homePicture" src="family.jpeg" alt="family swim"  rounded />
             </MDBCol>
             
+            
             <MDBCol >
               <div className="buzzword">
                 <p>        Upload
@@ -86,6 +87,11 @@ const Home = () => {
                 </p>
               </div>
             </MDBCol>
+
+            <MDBCol>
+              <Image className="homePicture" src="home-Surf.jpeg" alt="two surfers"  rounded />
+            </MDBCol>
+            
           </MDBRow>
         </MDBContainer>
     </div>
