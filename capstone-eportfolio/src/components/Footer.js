@@ -6,6 +6,13 @@ import { Button } from 'reactstrap';
 import Container from 'react-bootstrap/Container';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 
+
+
+function topFunction(e) {
+  e.preventDefault();
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 // footer component
 const Footer = () => {
   return (
@@ -77,7 +84,7 @@ const Footer = () => {
                 </ul>
           </MDBCol>
           <MDBCol float-right>
-            <Button className="top" href="#top" variant='outline-secondary' size="sm" style={{ backgroundColor:"#dfe6f5", color:"#366fc9" }}>TOP</Button>
+            <Button className="top" onClick={topFunction} variant='outline-secondary' size="sm" style={{ backgroundColor:"#dfe6f5", color:"#366fc9" }}>TOP</Button>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

@@ -24,7 +24,6 @@ const NavigationBar = (props) => {
 
   return (
     <div>
-      <a href="/" name="top"></a>
       <Navbar  light className="nav" expand="md">
         <NavbarBrand href="/"> NCDI  </NavbarBrand>
         <NavbarToggler onClick={toggle} />
