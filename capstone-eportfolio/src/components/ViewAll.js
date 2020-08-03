@@ -8,7 +8,7 @@ function ViewAll() {
   return (
     <div>
       <br></br>
-      <a href="/sample.pdf" target="_blank" className="link" download style={{color:"#366fc9"}}>Download All Reports</a>
+      <a href="PDFs/SecureDocs.pdf" target="_blank" className="link" download style={{color:"#366fc9"}}>Download All Reports</a>
       <p className="space"> </p>
     </div>
   );
