@@ -5,6 +5,7 @@ import SessionInfo from './SessionInfo.js';
 
 export default function Login({setLog}) {
   const [password, setPassword] = useState("");
+  const [errors, setErrrors] = useState([]);
   //the passwrd the user needs to get right
   const correctPW = "SRNics2020";
 
@@ -29,6 +30,7 @@ export default function Login({setLog}) {
     } else {
       console.log("password wrong");
       // i would like an error message to show up to the user 
+      setErrrors(["Password Incorrect"]);
     }
   }
 
@@ -46,9 +48,11 @@ export default function Login({setLog}) {
             type="password"
           />
         </FormGroup>
-        <Button block disabled={!validateForm()} type="submit">
+        
+        <Button block variant="info" disabled={!validateForm()} type="submit">
           Login
         </Button>
+        <div style={{color:"#FF5F76", marginTop: "15px"}}>{errors[0]} </div>
         <br/> <br/>
       </form>
     </div>

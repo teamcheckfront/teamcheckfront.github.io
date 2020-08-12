@@ -12,6 +12,7 @@ import Home from './components/Home.js';
 import AboutUs from './components/AboutUs.js';
 import SecureDocuments from './components/SecureDocuments.js';
 import Details from './components/Details.js';
+import Demo from './components/Demo.js';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route path="/details" component={Details} />
           <Route path="/aboutus" component={AboutUs}/>
+          <Route path="/demo" component={Demo} />
           <Route path="/securedocs" component={SecureDocuments}/>
           <Route path="/" component={Home}/>
         </Switch>

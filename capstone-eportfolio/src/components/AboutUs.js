@@ -122,6 +122,8 @@ class AboutUs extends Component {
       // if it's a desktop render the carousel
       return (
         <div >
+          <br />
+          <h3> Our Team</h3>
           <p  style={AboutUs.P_TOP_STYLE} >
             The team members have contributed equally to the success of this project. All members have the role of a 
             full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 

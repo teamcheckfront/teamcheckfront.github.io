@@ -6,6 +6,8 @@ import Figure from 'react-bootstrap/Figure';
 function Details() {
   return (
     <div>
+      <br />
+      <h3>Project Details</h3>
       <p className="desc" >
         Our team is excited to be working with Checkfront to develop a new importation
         system that is efficient and consistent amongst all client accounts. The system 
