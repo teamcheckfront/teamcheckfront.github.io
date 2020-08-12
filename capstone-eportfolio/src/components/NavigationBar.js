@@ -33,10 +33,13 @@ const NavigationBar = (props) => {
               <NavLink tag={RRNavLink} to="/" exact>Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RRNavLink} to="/details">Project Details</NavLink>
+              <NavLink tag={RRNavLink} to="/details">Details</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RRNavLink} to="/aboutus">Our Team</NavLink>
+              <NavLink tag={RRNavLink} to="/demo">Demo</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/aboutus">Team</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
