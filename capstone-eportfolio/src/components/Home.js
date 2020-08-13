@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header.js'
 import '../Styling/Home.css';
 import Image from "react-bootstrap/Image";
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow} from "mdbreact";
 
 // home component
 const Home = () => {
