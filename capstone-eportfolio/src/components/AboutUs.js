@@ -178,8 +178,8 @@ class AboutUs extends Component {
                    three. He looks forward to using his skills to help others connect and create through technology.
                 </p>
                 <a className="icon" href="https://www.linkedin.com/in/romansityayev/" target="_blank" rel="noopener noreferrer"><LinkedIn /></a>
-                <Tooltip title="romansityyev@gmail.com" interactive>
-                  <a className="icon" href="mailto:romansityyev@gmail.com"><Mail /></a>
+                <Tooltip title="romansityayev@gmail.com" interactive>
+                  <a className="icon" href="romansityayev@gmail.com"><Mail /></a>
                 </Tooltip>
                 <br/>
                 <br/>

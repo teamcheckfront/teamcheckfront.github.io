@@ -89,8 +89,7 @@ const Home = () => {
             </MDBCol>
                 
             <MDBCol>
-            <Image className="homePicture" src="jeep.jpeg" alt="jeep with surfboards on top"  rounded />
-              
+              <Image className="homePicture" src="jeep.jpeg" alt="jeep with surfboards on top"  rounded />
             </MDBCol>
             
           </MDBRow>
