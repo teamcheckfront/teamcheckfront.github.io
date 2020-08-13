@@ -2,6 +2,7 @@ import React from 'react';
 import '../Styling/Details.css';
 import Figure from 'react-bootstrap/Figure';
 
+
 // meeting notes component
 function Details() {
   return (
@@ -15,44 +16,74 @@ function Details() {
         NCDI system benefits both customers (by an improved introductory experience)
          and Checkfront staff (by saving time and resources). 
       </p>
-      <img className=" detailsPic" src="placeholder.jpg" alt="Matchings? map? mapping?"></img>
 
       <p className="desc">
         The NCDI system validates, transforms, and integrates customer booking data into Checkfront’s 
         system automatically. The application maps client data to Checkfront’s corresponding items and adjusts
          when they are not identical. It also dynamically customizes the program for each client account.
       </p>
+      <Figure className="photo">
+        <Figure.Image
+          alt="CSV Upload Page"
+          src="2details_importCSV.png"
+          rounded
+          fluid
+        />
+        <Figure.Caption>
+          Figure 1. The NCDI CSV file import step.
+        </Figure.Caption>
+      </Figure>
       <p className="desc">
         To use the system, a staff member first logs into the client account. They then upload a CSV file. This step can be seen 
-        below in Figure 1. Afterwards the user maps the CSV column names to the appropriate name used in Checkfront's database. They
+        above in Figure 1. Afterwards the user maps the CSV column names to the appropriate name used in Checkfront's database. They
         then map each unique item name in the CSV file to the item in Checkfront's system. This step can also be seen in Figure 2 below.
+      </p>
+      <Figure className="photo">
+        <Figure.Image
+          alt="Header Mapping"
+          src="3details_headermapping.png"
+          rounded
+          fluid
+        />
+        <Figure.Caption>
+          Figure 2. The NCDI header mapping step.
+        </Figure.Caption>
+      </Figure>
+      <p className="desc">
         Next the user will see a loading page while the program validates, transforms, and integrates the given data. Any data that 
         must be edited manually are written to a validation error file. Any data that cannot be pushed to Checkfront's API
-        for unknown reasons get written to an import error file. Once this process is complete, the user has the option to 
-        log out, or import more data.  
+        for unknown reasons get written to an import error file(Figure 3).
       </p>
       <Figure className="photo">
         <Figure.Image
           alt="UI mockup for csv import"
-          src="figma_import.jpeg"
+          src="6details_importationerror.png"
           rounded
           fluid
         />
         <Figure.Caption>
-          Figure 1. The UI mockup for a CSV file import.
+          Figure 3. The NCDI importation error notification.
         </Figure.Caption>
       </Figure>
+      <br/>
+      <br/>
+      <p>Once this process is complete, the user has the option to 
+        log out, or import more data(Figure 4).  
+      </p>
       <Figure className="photo">
         <Figure.Image
           alt="UI mockup for item mapping"
-          src="figma_item.jpeg"
+          src="7details_sucess.png"
           rounded
           fluid
         />
         <Figure.Caption>
-          Figure 2. The UI mockup for the item mapping. 
+          Figure 4. The NCDI succesful importation notification. 
         </Figure.Caption>
       </Figure>
+      <br/>
+      <br/>
+      <p className="buzzword"> <a href="https://teamcheckfront.github.io/#/demo">For more details click here to watch our demonstration video</a></p>
     </div>
   );
 }
