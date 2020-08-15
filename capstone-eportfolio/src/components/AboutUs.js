@@ -103,7 +103,7 @@ class AboutUs extends Component {
           <br />
           <h3> Our Team</h3>
           <MDBRow center className="desc about-us">
-            <MDBCol  lg={8} md={10} sm={10}>
+            <MDBCol  className="mcol" lg={8} md={10} sm={10}>
               <p >
                 The team members have contributed equally to the success of this project. All members have the role of a 
                 full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 
@@ -169,7 +169,7 @@ class AboutUs extends Component {
             </ReactCardCarousel>
           </div>
           <MDBRow center className="desc">
-            <MDBCol  lg={8} md={10} sm={10}>
+            <MDBCol  className="mcol" lg={8} md={10} sm={10}>
               <p >
                 Team Checkfront would like to thank their project sponsors Robert McMynn and Stefanie Warren for making this opportunity
                 possible. They appreciate all of the encouragement and support Jason Michael and the other Checkfront staff have given 
