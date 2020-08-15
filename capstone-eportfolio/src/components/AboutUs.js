@@ -102,7 +102,7 @@ class AboutUs extends Component {
         <div >
           <br />
           <h3> Our Team</h3>
-          <MDBRow center className="desc">
+          <MDBRow center className="desc about-us">
             <MDBCol  lg={8} md={10} sm={10}>
               <p >
                 The team members have contributed equally to the success of this project. All members have the role of a 
