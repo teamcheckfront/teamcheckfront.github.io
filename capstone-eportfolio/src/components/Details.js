@@ -1,8 +1,7 @@
 import React from 'react';
 import '../Styling/Details.css';
 import Figure from 'react-bootstrap/Figure';
-import { MDBCol, MDBContainer, MDBRow} from "mdbreact";
-
+import { MDBCol, MDBRow} from "mdbreact";
 
 // meeting notes component
 function Details() {
@@ -11,7 +10,7 @@ function Details() {
       <br />
       <h3>Project Details</h3>
       <MDBRow center className="desc" >
-        <MDBCol  lg={8} md={10} sm={10}>
+        <MDBCol className="mcol" lg={8} md={10} sm={10}>
           Our team is excited to be working with Checkfront to develop a new importation
           system that is efficient and consistent amongst all client accounts. The system 
           is a web-based application that will be used internally by Checkfront staff. The 
@@ -22,7 +21,7 @@ function Details() {
       </MDBRow>
 
       <MDBRow center className="desc">
-        <MDBCol  lg={8} md={10} sm={10}>
+        <MDBCol className="mcol" lg={8} md={10} sm={10}>
           The NCDI system validates, transforms, and integrates customer booking data into Checkfront’s 
           system automatically. The application maps client data to Checkfront’s corresponding items and adjusts
           when they are not identical. It also dynamically customizes the program for each client account.
@@ -42,7 +41,7 @@ function Details() {
       </Figure>
 
       <MDBRow center className="desc">
-        <MDBCol  lg={8} md={10} sm={10}>
+        <MDBCol className="mcol" lg={8} md={10} sm={10}>
           To use the system, a staff member first logs into the client account. They then upload a CSV file. This step can be seen 
           above in Figure 1. Afterwards the user maps the CSV column names to the appropriate name used in Checkfront's database. They
           then map each unique item name in the CSV file to the item in Checkfront's system. This step can also be seen in Figure 2 below.
@@ -62,10 +61,10 @@ function Details() {
       </Figure>
 
       <MDBRow center className="desc">
-        <MDBCol  lg={8} md={10} sm={10}>
-        Next the user will see a loading page while the program validates, transforms, and integrates the given data. Any data that 
-        must be edited manually are written to a validation error file. Any data that cannot be pushed to Checkfront's API
-        for unknown reasons get written to an import error file (Figure 3).
+        <MDBCol className="mcol" lg={8} md={10} sm={10}>
+          Next the user will see a loading page while the program validates, transforms, and integrates the given data. Any data that 
+          must be edited manually are written to a validation error file. Any data that cannot be pushed to Checkfront's API
+          for unknown reasons get written to an import error file (Figure 3).
         </ MDBCol>
       </ MDBRow>
 
@@ -84,7 +83,7 @@ function Details() {
       <br/>
 
       <MDBRow center className="short-desc">
-        <MDBCol  lg={8} md={10} sm={10}>
+        <MDBCol className="mcol" lg={8} md={10} sm={10}>
           Once this process is complete, the user has the option to 
           log out, or import more data (Figure 4).  
         </ MDBCol>

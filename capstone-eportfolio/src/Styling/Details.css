@@ -23,3 +23,7 @@
 .more-details {
   margin-top: 30px;
 }
+
+.mcol {
+  margin: auto auto auto auto !important;
+}
