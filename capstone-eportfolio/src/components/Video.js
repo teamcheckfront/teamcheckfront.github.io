@@ -6,6 +6,10 @@ import '../Styling/Video.css';
 export default props => {
   return (
     <div className="video-div">
+      <link
+      rel="stylesheet"
+      href="https://video-react.github.io/assets/video-react.css"
+    />
       <Player
         className="video-player"
         playsInline
