@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <Header />
         <MDBContainer className="home">
-          <MDBRow center>
+          <MDBRow center className="text-spacing">
                 <p className="desc"> 
                   Checkfront is a tenured supporter of Camosun College’s Capstone program and has presented another
                   unique challenge for this year. Checkfront is a local, home-grown online booking management 
@@ -26,9 +26,9 @@ const Home = () => {
 
 
 
-          <MDBRow center>
+          <MDBRow center className="text-spacing">
           <MDBCol size="6">
-              <Image className="homePicture" src="desertTour.jpeg" alt="camel ride" rounded />
+              <Image className="homePicture" src="parasailing.jpeg" alt="camel ride" rounded />
             </MDBCol>
 
             <MDBCol size="6">
@@ -43,7 +43,7 @@ const Home = () => {
 
 
 
-          <MDBRow around >
+          <MDBRow around className="text-spacing">
           <MDBCol size="6">
               <p className="desc">
                 Checkfront frequently works with new clients who need to transfer existing booking data into 
@@ -56,13 +56,13 @@ const Home = () => {
             </MDBCol>
 
             <MDBCol>
-              <Image className="homePicture" src="tent1.jpeg" alt="tent Rental" rounded />
+              <Image className="homePicture" src="jeep.jpeg" alt="tent Rental" rounded />
             </MDBCol>
           </MDBRow>
 
 
 
-          <MDBRow>
+          <MDBRow className="text-spacing">
             <p className="desc">
               The aptly-named Team Checkfront, consisting of Samreeta (Sam), Roman, and 
               Natasha, has partnered with Checkfront to provide a New Customer Data Importation (NCDI) system as a 
@@ -72,9 +72,9 @@ const Home = () => {
 
 
 
-          <MDBRow>
+          <MDBRow className="text-spacing">
             <MDBCol>
-              <Image className="homePicture" src="balloons.jpeg" alt="hot air balloons"  rounded />
+              <Image className="bottomPicture" src="desertTour.jpeg" alt="hot air balloons"  rounded />
             </MDBCol>
             
             
@@ -89,7 +89,7 @@ const Home = () => {
             </MDBCol>
                 
             <MDBCol>
-              <Image className="homePicture" src="jeep.jpeg" alt="jeep with surfboards on top"  rounded />
+              <Image className="bottomPicture" src="balloons.jpeg" alt="jeep with surfboards on top"  rounded />
             </MDBCol>
             
           </MDBRow>

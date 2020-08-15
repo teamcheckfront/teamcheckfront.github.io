@@ -1,4 +1,5 @@
 import React from 'react';
+import Video from './Video.js'
 
 // home component
 const Demo = () => {
@@ -6,7 +7,7 @@ const Demo = () => {
     <div>
       <br />
       <h3> Project Demo</h3>
-      <h5>Coming Soon</h5>
+      <Video />
 
     </div>
       
