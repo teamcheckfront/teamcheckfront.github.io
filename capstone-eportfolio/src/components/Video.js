@@ -1,4 +1,4 @@
-//import "node_modules/video-react/dist/video-react.css"; // import css
+import "../../node_modules/video-react/dist/video-react.css"; // import css
 import React from 'react';
 import { Player } from 'video-react';
 import '../Styling/Video.css';
@@ -6,10 +6,7 @@ import '../Styling/Video.css';
 export default props => {
   return (
     <div className="video-div">
-      <link
-      rel="stylesheet"
-      href="https://video-react.github.io/assets/video-react.css"
-    />
+      
       <Player
         className="video-player"
         playsInline
