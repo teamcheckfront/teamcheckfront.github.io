@@ -4,7 +4,8 @@ import Image from "react-bootstrap/Image";
 import LinkedIn from "react-feather/dist/icons/linkedin";
 import Mail from "react-feather/dist/icons/mail";
 import Tooltip from '@material-ui/core/Tooltip';
-import '../Styling/AboutUs.css'
+import '../Styling/AboutUs.css';
+import { MDBCol, MDBContainer, MDBRow} from "mdbreact";
 
 class AboutUs extends Component {
 
@@ -54,7 +55,7 @@ class AboutUs extends Component {
   static get BLOCK_CARD_STYLE() {
       return {
         height: "auto",
-        width: "450px",
+        width: "500px",
         paddingTop: "30px",
         padding: "10px",
         textAlign: "center",
@@ -67,29 +68,6 @@ class AboutUs extends Component {
         display: "block"
       }
   }
-
-  
- 
-  // Style for the p tags
-  static get P_TOP_STYLE() {
-    return {
-      padding:"2em 2em 2em",
-      margin: "auto",
-      textAlign: "justify" ,
-      fontSize: "20px",
-      display: "block"
-    }
-  }
- // Style for the p tags
- static get P_BOTTOM_STYLE() {
-  return {
-    padding:"4em 2em 0em",
-    margin: "auto",
-    textAlign: "justify" ,
-    fontSize: "20px",
-    display: "block"
-  }
-}
 
   // -- CLASS FUNCTIONS --
   // constructor
@@ -124,18 +102,22 @@ class AboutUs extends Component {
         <div >
           <br />
           <h3> Our Team</h3>
-          <p  style={AboutUs.P_TOP_STYLE} >
-            The team members have contributed equally to the success of this project. All members have the role of a 
-            full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 
-            project manager. She keeps the group on task and organized. Natasha acts as the liaison between the project sponsors
-             and team. Roman brings his experience working in teams to facilitate team and faculty communication.
-          </p>
+          <MDBRow center className="desc">
+            <MDBCol  lg={8} md={10} sm={10}>
+              <p >
+                The team members have contributed equally to the success of this project. All members have the role of a 
+                full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 
+                project manager. She keeps the group on task and organized. Natasha acts as the liaison between the project sponsors
+                and team. Roman brings his experience working in teams to facilitate team and faculty communication.
+              </p>
+            </MDBCol>
+          </MDBRow>
           <div style={AboutUs.CONTAINER_STYLE}>
             <ReactCardCarousel autoplay={false} autoplay_speed={12000}>
               <div style={AboutUs.CARD_STYLE}>
                 <Image className="photo" src="samreeta.jpeg" alt="Samreeta" height="300px" rounded/>
                 <h3>Samreeta Kandola</h3>
-                <p>
+                <p className="card-text">
                   Sam followed her passion for the outdoors and sciences to Victoria where she earned a Bachelor’s
                   degree in Biopsychology from UVic. While working in sales and as a Canadian Certified Optometric
                   Assistant, she developed an interest in project management. Exploring this path led Sam to discover the
@@ -153,7 +135,7 @@ class AboutUs extends Component {
               <div style={AboutUs.CARD_STYLE}>
                 <Image className="photo" src="natasha.jpeg" alt="Natasha" height="300px" rounded/>
                 <h3>Natasha Bains</h3>
-                <p>
+                <p className="card-text">
                   Natasha has always valued a strong commitment to implementing quality code and adapting to any given situation.
                   Her biggest strength is her ability to analyze problems from multiple perspectives. Her experience in customer
                   service, and coming from a large family has established a deep understanding of communication. This has
@@ -170,7 +152,7 @@ class AboutUs extends Component {
               <div style={AboutUs.CARD_STYLE}>
                 <Image className="photo" src="roman.png" alt="Roman" height="300px" rounded/>
                 <h3>Roman Sityayev</h3>
-                <p>
+                <p className="card-text">
                   Roman grew up playing sports and music, and discovered an interest in the relationships between people, 
                   creativity, and technology. He moved to Victoria to pursue his passion for music and technology, working in the
                    telecommunications industry for many years in sales and management while being involved in various musical 
@@ -186,30 +168,40 @@ class AboutUs extends Component {
               </div>
             </ReactCardCarousel>
           </div>
-          <p style={AboutUs.P_BOTTOM_STYLE }>
-            Team Checkfront would like to thank their project sponsors Robert McMynn and Stefanie Warren for making this opportunity
-             possible. They appreciate all of the encouragement and support Jason Michael and the other Checkfront staff have given 
-             their team. They would also like to recognize the continued education and guidance Saryta Schaerer and the ICS faculty 
-             have provided them. Team Checkfront looks forward to successfully implementing the NCDI system and learning valuable 
-             skills along the way. 
-          </p>
+          <MDBRow center className="desc">
+            <MDBCol  lg={8} md={10} sm={10}>
+              <p >
+                Team Checkfront would like to thank their project sponsors Robert McMynn and Stefanie Warren for making this opportunity
+                possible. They appreciate all of the encouragement and support Jason Michael and the other Checkfront staff have given 
+                their team. They would also like to recognize the continued education and guidance Saryta Schaerer and the ICS faculty 
+                have provided them. Team Checkfront looks forward to successfully implementing the NCDI system and learning valuable 
+                skills along the way. 
+              </p>
+            </MDBCol>
+          </MDBRow>
         </div>
       );
     }else {
       // it's not a desktop -- render individual cards
       return (
         <div>
-          <p style={AboutUs.P_TOP_STYLE}>
-            The team members have contributed equally to the success of this project. All members have the role of a 
-            full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 
-            project manager. She keeps the group on task and organized. Natasha acts as the liaison between the project sponsors
-            and team. Roman brings his experience working in teams to facilitate team and faculty communication.
-          </p>
+          <br />
+          <h3> Our Team</h3>
+          <MDBRow center className="desc">
+            <MDBCol  lg={8} md={10} sm={10}>
+              <p>
+                The team members have contributed equally to the success of this project. All members have the role of a 
+                full-stack developer. However, each individual does have a unique role within the group. Sam acts as the 
+                project manager. She keeps the group on task and organized. Natasha acts as the liaison between the project sponsors
+                and team. Roman brings his experience working in teams to facilitate team and faculty communication.
+              </p>
+            </MDBCol>
+          </MDBRow>
           <div style={AboutUs.BLOCK_STYLE}>
             <div style={AboutUs.BLOCK_CARD_STYLE}>
               <Image className="photo" src="samreeta.jpeg" alt="Samreeta" height="300px" rounded/>
               <h3>Samreeta Kandola</h3>
-              <p>
+              <p className="card-text">
                 Sam followed her passion for the outdoors and sciences to Victoria where she earned a Bachelor’s
                 degree in Biopsychology from UVic. While working in sales and as a Canadian Certified Optometric
                 Assistant, she developed an interest in project management. Exploring this path led Sam to discover the
@@ -225,7 +217,7 @@ class AboutUs extends Component {
             <div style={AboutUs.BLOCK_CARD_STYLE}>
               <Image className="photo" src="natasha.jpeg" alt="Natasha" height="300px" rounded/>
               <h3>Natasha Bains</h3>
-              <p>
+              <p className="card-text">
                 Natasha has always valued a strong commitment to implementing quality code and adapting to any given situation.
                 Her biggest strength is her ability to analyze problems from multiple perspectives. Her experience in customer
                 service, and coming from a large family has established a deep understanding of communication. This has
@@ -240,7 +232,7 @@ class AboutUs extends Component {
             <div style={AboutUs.BLOCK_CARD_STYLE}>
               <Image className="photo" src="roman.png" alt="Roman" height="300px" rounded/>
               <h3>Roman Sityayev</h3>
-              <p>
+              <p className="card-text">
                 Roman grew up playing sports and music, and discovered an interest in the relationships between people, 
                 creativity, and technology. He moved to Victoria to pursue his passion for music and technology, working in the
                 telecommunications industry for many years in sales and management while being involved in various musical 
@@ -253,14 +245,18 @@ class AboutUs extends Component {
               <br/>
             </div>
           </div>
-        <p style={AboutUs.P_BOTTOM_STYLE}>
-          Team Checkfront would like to thank their project sponsors Robert McMynn and Stefanie Warren for making this opportunity
-           possible. They appreciate all of the encouragement and support Jason Michael and the other Checkfront staff have given 
-           their team. They would also like to recognize the continued education and guidance Saryta Schaerer and the ICS faculty 
-           have provided them. Team Checkfront looks forward to successfully implementing the NCDI system and learning valuable 
-           skills along the way. 
-        </p>
-      </div>
+          <MDBRow center className="desc">
+            <MDBCol  lg={8} md={10} sm={10}>
+              <p>
+                Team Checkfront would like to thank their project sponsors Robert McMynn and Stefanie Warren for making this opportunity
+                possible. They appreciate all of the encouragement and support Jason Michael and the other Checkfront staff have given 
+                their team. They would also like to recognize the continued education and guidance Saryta Schaerer and the ICS faculty 
+                have provided them. Team Checkfront looks forward to successfully implementing the NCDI system and learning valuable 
+                skills along the way. 
+              </p>
+            </MDBCol>
+          </MDBRow>
+        </div>
       );
     } 
   }
