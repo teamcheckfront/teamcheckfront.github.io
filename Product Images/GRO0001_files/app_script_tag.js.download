@@ -1,0 +1,780 @@
+var GeoTools = function($) {
+    var shopUrl = Shopify.shop;
+    var geoData, geoLocationFull, closedModals = {};
+    var seconds = 0, stopWatch;
+    var translations;
+    var oneDay = 1*24*60*60*1000;
+
+    var handleInit = function() {
+        function geoShowPopupForLocation(data) {
+            geoData = data.location;
+            console.warn('------');
+            console.log('Your ip: ', geoData.ip);
+            console.log('Your country: ', geoData.country_name)
+            console.log('Your region: ', geoData.region_name)
+            console.log('You city: ', geoData.city);
+            console.warn('------');
+
+            translations = data.translations;
+            geoLocationFull = GeoTools.getFullLocation(geoData);
+
+            handlePopup(data.modals);
+        }
+
+        function getLocationFromNavigator() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPositionFromNavigator, showErrorFromNavigator);
+            } else {
+                console.log('Geolocation is not supported by this browser.');
+                geoGetUserLocation(-1, '');
+            }
+        }
+
+        function showErrorFromNavigator(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    console.log('User denied the request for Geolocation.');
+                    geoGetUserLocation(-1, '');
+
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log('Location information is unavailable.');
+                    geoGetUserLocation(-1, '');
+
+                    break;
+                case error.TIMEOUT:
+                    console.log('The request to get user location timed out.');
+                    geoGetUserLocation(-1, '');
+
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log('An unknown error occurred.');
+                    geoGetUserLocation(-1, '');
+
+                    break;
+            }
+        }
+
+        function showPositionFromNavigator(position) {
+            geoGetUserLocation(1, {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+        }
+        // HTML5
+
+        function geoGetUserLocation(method, position) {
+            $.ajax({
+                type: 'GET',
+                url: GeoTools.getScriptUrl('location'),
+                data: {
+                    'shop': shopUrl,
+                    'method': method,
+                    'is_mobile': GeoTools.isMobileDevice() ? 1 : 0,
+                    'position': position,
+                    'url': window.location.href,
+                    'page_type': window.ShopifyAnalytics.meta.page.pageType === undefined ? 'any' : window.ShopifyAnalytics.meta.page.pageType,
+                    'ua': navigator.userAgent,
+                    'has_discount': GeoTools.readCookie('sub_popup') !== null ? 1 : 0,
+                    'popup_id': GeoTools.readCookie('sub_popup') !== null ? GeoTools.readCookie('sub_popup') : 0
+                },
+                xhrFields: {
+                    withCredentials: true
+                }
+            }).done(function(data) {
+                var loctimeout = data.location ? data.location.timeout : 0;
+                setTimeout(function() {
+                    if (data.response == 300) {
+                        geoShowPopupForLocation(data);
+                    }
+
+                    if (data.response == 100) {
+                        geoShowPopupForLocation(data);
+                    }
+
+                    if (data.response == 200) {
+                        getLocationFromNavigator();
+                    }
+                }, loctimeout * 1000);
+
+            }).fail(function(xhr, status, error) {
+                console.log(xhr.responseText + '|\n' + status + '|\n' +error);
+            });
+        }
+
+        function geoGetLocationForPreview(popup_id) {
+            $.get(GeoTools.getScriptUrl('preview_location'), {
+                'shop': shopUrl,
+                'popup_id': popup_id,
+                //'ua': navigator.userAgent
+            }).done(function(data) {
+                var loctimeout = data.location ? data.location.timeout : 0;
+                setTimeout(function() {
+                    if (data.modals.id !== undefined && data.modals.id && !document.getElementById('popup-' + data.modals.id)) {
+                        geoData = data.location;
+                        geoLocationFull = GeoTools.getFullLocation(geoData);
+                        translations = data.translations;
+
+                        handleExaplePopup(data.modals);
+                    }
+                }, loctimeout * 1000);
+            });
+        }
+
+        if (
+            GeoTools.getUrlParameter('geo_targeting_ignore_admin') !== undefined &&
+            GeoTools.getUrlParameter('geo_targeting_ignore_admin').length
+        ) {
+            alert('Success! Now you won\'t see the chosen campaigns in your browser.');
+
+            GeoTools.createCookie('geo_targeting_ignore_admin', true, 1*24*60*100000*1000);
+        }
+
+        if (GeoTools.getUrlParameter('gp') !== undefined && GeoTools.getUrlParameter('gp').length) {
+            geoGetLocationForPreview(GeoTools.getUrlParameter('gp'));
+        } else {
+            geoGetUserLocation(0, '');
+        }
+
+        if (GeoTools.readCookie('subscribed') !== null && window.location.href.indexOf('/challenge') === -1) {
+            //geoGetUserLocation(0, '');
+
+            if (GeoTools.readCookie('sub_email') !== null && GeoTools.readCookie('sub_phone') !== null) {
+                $.ajax({
+                    type: 'GET',
+                    url: GeoTools.getScriptUrl('subscribe'),
+                    data: {
+                        'shop': shopUrl,
+                        'ua': navigator.userAgent,
+                        'email': GeoTools.readCookie('sub_email'),
+                        'phone': GeoTools.readCookie('sub_phone')
+                    }
+                });
+            }
+        }
+    };
+
+    var handleExaplePopup = function(popup) {
+        $(document).on('click', '.closeModal', function() {
+            var type = $(document).find('.isActive').children('.slickWindow').data('type');
+
+            if (type == 'fullpage-video') {
+                $('#Video-IFrame').attr('src', '');
+            }
+
+            $(document).find('.slickModal.isActive').removeClass('isActive')
+                .children('.slickOverlay').removeClass('slideBottom')
+                .siblings('.slickWindow:not(.hidden)').removeClass('slideBottom');
+        });
+
+        $(document).on('click', '.coupon-code', function(e) {
+            e.stopImmediatePropagation();
+            GeoTools.copyToClipboard($(this));
+            $('.coupon-notify').css({opacity: 1.0, visibility: 'visible'});
+
+            setTimeout(function() {
+                $('.coupon-notify').css({visibility: 'hidden'});
+            }, 2000);
+        });
+
+        $(document).on('click', '.action-link-button', function() {
+            if ($(this).hasClass('close-button')) {
+                incrementViews();
+                GeoTools.dismissSlick();
+            }
+        });
+
+        $(document).on('click', '.Add-To-Cart-GEO', function() {
+            $(this).data('variant-id', $('.Product-Select').find(':selected').data('variant-id'));
+            $.post('/cart/add.js', { quantity: 1, id: $(this).data('variant-id') });
+            alertify.message(translations.product_added_to_cart);
+        });
+
+        $(document).on('submit', '#geo_contact_form', function(e) {
+            if ($('#geo_email_sub_popup').val()) {
+                incrementViews();
+                GeoTools.dismissSlick();
+                GeoTools.createCookie($('#geo_email_sub_popup').val(), true, oneDay);
+            }
+        });
+
+        $(document).on('change', '.Product-Select', function() {
+            $('.slickContent .prod-price').html($(this).find(':selected').data('variant-price'));
+            $('.Add-To-Cart-GEO').data('variant-id', $(this).find(':selected').data('variant-id'));
+
+            if ($(this).find(':selected').data('variant-img')) {
+                $('.slickContent .left img').attr('src', $(this).find(':selected').data('variant-img'));
+            }
+        });
+
+        $(document).on('click', '#submit-zip-code', function() {
+            var zip_val = $('#zip-code-field').val();
+            var modalID = $(document).find('.isActive').data('id');
+
+            if (zip_val) {
+                if (GeoTools.findInArray(window.shopify_zip_codes, zip_val) !== -1) {
+                    $(document).find('#popup-zip-welcome').removeClass('isActive')
+                        .siblings('.slickWindow:not(.hidden)').removeClass('slideBottom');
+
+                    $('.slickModal:not("#popup-zip-welcome"):not("#popup-zip-finish")').addClass('isActive');
+                } else {
+                    $(document).find('#popup-zip-welcome').removeClass('isActive')
+                        .siblings('.slickWindow:not(.hidden)').removeClass('slideBottom');
+
+                    $('#popup-zip-finish').addClass('isActive');
+                }
+            }
+        });
+
+        $(document).on('submit', '#geo_zip_contact_form', function(e) {
+            if ($('#geo_zip_email_sub_popup').val()) {
+                incrementViews();
+                GeoTools.dismissSlick();
+                GeoTools.createCookie($('#geo_zip_email_sub_popup').val(), true, oneDay);
+            }
+        });
+
+        if (!$.isEmptyObject(popup)) {
+            if (popup.html.indexOf('%LOCATION%') != -1) {
+                popup.html = GeoTools.replaceAll(popup.html, '%LOCATION%', geoLocationFull);
+            } if (popup.html.indexOf('%COUNTRY%') != -1) {
+                popup.html = GeoTools.replaceAll(popup.html, '%COUNTRY%', GeoTools.getCountryLocation(geoData));
+            } if (popup.html.indexOf('%STATE%') != -1) {
+                popup.html = GeoTools.replaceAll(popup.html, '%STATE%', GeoTools.getStateLocation(geoData));
+            } if (popup.html.indexOf('%CITY%') != -1) {
+                popup.html = GeoTools.replaceAll(popup.html, '%CITY%', GeoTools.getCityLocation(geoData));
+            }
+
+            $('head').append(popup.style);
+            $('body').append(popup.html);
+
+            if (popup.zip === 1) {
+                $('#popup-zip-welcome')
+                    .addClass('isActive')
+                    .children('.slickOverlay').addClass('slideBottom')
+                    .siblings('.slickWindow').addClass('slideBottom');
+            }
+
+            if (popup.zip === 0) {
+                $('#popup-'+popup.id)
+                    .addClass('isActive')
+                    .children('.slickOverlay').addClass('slideBottom')
+                    .siblings('.slickWindow').addClass('slideBottom');
+            }
+
+            if ($('div[data-type="fullpage-image"]').length) {
+                setTimeout(function() {
+                    var $modal = $(document).find('.slickModal').children('.slickWindow');
+                    if ($modal.children('img.align-right').length || $modal.children('img.align-left').length) {
+                        $modal.css('display', 'flex');
+                        $modal.css('align-items', 'center');
+                    }
+                    //$modal.children('img.align-right').first().css('position', 'absolute');
+                    //$modal.children('img.align-right').first().css('left', '60%');
+                    //$modal.children('img.align-right').first().css('max-height', '100%');
+                    //$modal.children('img.align-left').first().css('max-height', '100%');
+                }, 350);
+            }
+        }
+    }
+
+    var incrementViews = function(popup = null) {
+        let modalID;
+        if (popup !== null) {
+            modalID = popup.id;
+        } else {
+            modalID = $(document).find('.isActive').data('id');
+        }
+        if (modalID) {
+            $.get(GeoTools.getScriptUrl('counter/increment'), {
+                'popup_id': modalID,
+            }).done(function(data) {
+                console.log(data);
+            });
+        }
+    }
+
+    var handlePopup = function(response) {
+        var n = 0;
+        $(window).bind('keydown', function(e) {
+            if (e.keyCode === 27) {
+                incrementViews();
+                GeoTools.dismissSlick();
+            }
+        });
+
+        $(document).on('click', '.closeModal', function() {
+            incrementViews();
+            GeoTools.dismissSlick();
+        });
+
+        $(document).on('click', '.coupon-code', function(e) {
+            n += 1;
+            e.stopImmediatePropagation();
+            GeoTools.copyToClipboard($(this));
+            $('.coupon-notify').css({opacity: 1.0, visibility: 'visible'});
+
+            setTimeout(function() {
+                $('.coupon-notify').css({visibility: 'hidden'});
+            }, 2000);
+
+            if (n <= 1) {
+                GeoTools.sendGoogleEvent('Geo Targeting discount', 'Copy discount code', $('.slickContent .title').text());
+            }
+        });
+
+        if (window.ShopifyAnalytics.meta.page.pageType == 'home') {
+            $.each(response, function(key, popup) {
+                if (popup.popup_params.force_discount == "1") {
+                    if (!GeoTools.readCookie('auto_redirect_coupon')) {
+                        if (popup.expiration == '24h') {
+                            popup.expiration = 86400;
+                        } else if (popup.expiration == 'infinite') {
+                            popup.expiration = 157680000;
+                        }
+
+                        incrementViews(popup);
+
+                        document.cookie = "auto_redirect_coupon=true; max-age=" + popup.expiration;
+                        fetch(document.location.origin + '/checkout?discount=' + popup.popup_params.popup_coupon)
+                            .then(response => console.log('your coupon has been applied'))
+                    } else {
+                        return;
+                    }
+                }
+            });
+        }
+        if (window.ShopifyAnalytics.meta.page.pageType == 'home' && GeoTools.readCookie('subscribed') !== null) {
+            GeoTools.showSubscribedNotice();
+
+
+            $.each(response, function(key, popup) {
+                if (GeoTools.readCookie('geo_targeting_ignore_admin') !== null && popup.ignore === 1) {
+                    return;
+                }
+
+
+                $('head').append(popup.style);
+                $('body').append(popup.html_coupon);
+
+                $('#popup-'+key+'-after_subscribe')
+                    .addClass('isActive')
+                    .children('.slickOverlay').addClass('slideBottom')
+                    .siblings('.slickWindow').addClass('slideBottom');
+
+                incrementViews();
+            });
+        }
+
+        $(document).on('submit', '#geo_contact_form', function(e) {
+            var userEmail = $('#geo_email_sub_popup').length ? $('#geo_email_sub_popup').val() : '';
+            var userPhone = $('#geo_phone_sub_popup').length ? $('#geo_phone_sub_popup').val() : '';
+
+            if (userEmail) {
+                GeoTools.dismissSlick();
+                GeoTools.createCookie('sub_email', userEmail, oneDay);
+            }
+
+            if (userPhone) {
+                GeoTools.createCookie('sub_phone', userPhone, oneDay);
+            }
+            incrementViews();
+            GeoTools.createCookie(userEmail, true, oneDay);
+            GeoTools.createCookie('subscribed', true, oneDay);
+        });
+
+        $(document).on('click', '.action-link-button', function() {
+            var modalID = $(document).find('.isActive').data('id');
+            var expire = parseInt($('.Popup-Expire').text())*60*1000;
+
+            if ($(this).hasClass('close-button')) {
+                incrementViews();
+                GeoTools.dismissSlick();
+            }
+
+            // add cookie for expiring
+            var expires = "";
+            var date = new Date();
+            date.setTime(date.getTime() + expire);
+            expires = "; expires=" + date.toUTCString();
+            document.cookie = 'ppkcookie-'+modalID + "=" + true + expires + "; path=/";
+
+            $.get(GeoTools.getScriptUrl('counter/increment'), {
+                'popup_id': modalID,
+            }).done(function(data) {
+                console.log(data);
+            });
+
+            // add cookie for sub_popup
+            expires = "";
+            date = new Date();
+            date.setTime(date.getTime() + expire);
+            expires = "; expires=" + date.toUTCString();
+            document.cookie = 'sub_popup' + "=" + modalID + expires + "; path=/";
+
+            GeoTools.sendGoogleEvent($(this).data('action'), $(this).data('category'), $(this).data('label'));
+        });
+
+        $(document).on('click', '.Add-To-Cart-GEO', function() {
+            $(this).data('variant-id', $('.Product-Select').find(':selected').data('variant-id'));
+            $.post('/cart/add.js', { quantity: 1, id: $(this).data('variant-id') });
+            alertify.message(translations.product_added_to_cart);
+        });
+
+        $(document).on('change', '.Product-Select', function() {
+            $('.slickContent .prod-price').html($(this).find(':selected').data('variant-price'));
+            $('.Add-To-Cart-GEO').data('variant-id', $(this).find(':selected').data('variant-id'));
+
+            if ($(this).find(':selected').data('variant-img')) {
+                $('.slickContent .left img').attr('src', $(this).find(':selected').data('variant-img'));
+            }
+        });
+
+        $(document).on('click', '#submit-zip-code', function() {
+            var zip_val = $('#zip-code-field').val();
+            var modalID = $(document).find('.isActive').data('id');
+
+            if (zip_val) {
+                if (GeoTools.findInArray(window.shopify_zip_codes, zip_val) !== -1) {
+                    $(document).find('#popup-zip-welcome').removeClass('isActive')
+                        .siblings('.slickWindow:not(.hidden)').removeClass('slideBottom');
+
+                    $('.slickModal:not("#popup-zip-welcome"):not("#popup-zip-finish")').addClass('isActive');
+                } else {
+                    $(document).find('#popup-zip-welcome').removeClass('isActive')
+                        .siblings('.slickWindow:not(.hidden)').removeClass('slideBottom');
+
+                    $('#popup-zip-finish').addClass('isActive');
+                }
+            }
+        });
+
+        $(document).on('submit', '#geo_zip_contact_form', function(e) {
+            if ($('#geo_zip_email_sub_popup').val()) {
+                incrementViews();
+                GeoTools.dismissSlick();
+                GeoTools.createCookie($('#geo_zip_email_sub_popup').val(), true, oneDay);
+            }
+        });
+
+        var isRobotCheckPage = window.location.href.indexOf('/challenge') > -1;
+
+        if (!isRobotCheckPage && !$.isEmptyObject(response)) {
+            $.each(response, function(key, popup) {
+                if (GeoTools.readCookie('geo_targeting_ignore_admin') !== null && popup.ignore === 1) {
+                    return;
+                }
+
+                if (GeoTools.readCookie('ppkcookie-'+popup.id) === null && popup.html) {
+                    if (popup.html.indexOf('%LOCATION%') != -1) {
+                        popup.html = GeoTools.replaceAll(popup.html, '%LOCATION%', geoLocationFull);
+                    } if (popup.html.indexOf('%COUNTRY%') != -1) {
+                        popup.html = GeoTools.replaceAll(popup.html, '%COUNTRY%', GeoTools.getCountryLocation(geoData));
+                    } if (popup.html.indexOf('%STATE%') != -1) {
+                        popup.html = GeoTools.replaceAll(popup.html, '%STATE%', GeoTools.getStateLocation(geoData));
+                    } if (popup.html.indexOf('%CITY%') != -1) {
+                        popup.html = GeoTools.replaceAll(popup.html, '%CITY%', GeoTools.getCityLocation(geoData));
+                    }
+
+                    $('head').append(popup.style);
+                    $('body').append(popup.html);
+
+                    $('body').append(popup.html_coupon);
+
+                    $('#popup-'+key+',#popup-zip-welcome,#popup-zip-finish')
+                        .attr('data-key', key)
+                        .attr('data-id', popup.id);
+
+                    if (popup.zip === 1) {
+                        $('#popup-zip-welcome')
+                            .addClass('isActive')
+                            .children('.slickOverlay').addClass('slideBottom')
+                            .siblings('.slickWindow').addClass('slideBottom');
+                    }
+
+                    if (popup.zip === 0) {
+                        $('#popup-'+key)
+                            .addClass('isActive')
+                            .children('.slickOverlay').addClass('slideBottom')
+                            .siblings('.slickWindow').addClass('slideBottom');
+                    }
+
+                    if ($('div[data-type="fullpage-image"]').length) {
+                        setTimeout(function() {
+                            var $modal = $(document).find('.slickModal').children('.slickWindow');
+                            if ($modal.children('img.align-right').length || $modal.children('img.align-left').length) {
+                                $modal.css('display', 'flex');
+                                $modal.css('align-items', 'center');
+                            }
+                        }, 350);
+                    }
+
+                    GeoTools.timer();
+                } else if (!closedModals.hasOwnProperty(key)) {
+                    if (popup.popup_type == 'redirect_url') {
+                        $('body').append(popup.html);
+                    }
+
+                    var data = {
+                        'shop': shopUrl,
+                        'url': window.location.href,
+                        'geo_data': JSON.stringify(geoData),
+                        'page_type': window.ShopifyAnalytics.meta.page.pageType === undefined ? 'any' : window.ShopifyAnalytics.meta.page.pageType,
+                    };
+
+                    closedModals[key] = true;
+
+                    $.ajax({
+                        type: 'GET',
+                        url: GeoTools.getScriptUrl('retry'),
+                        data: data
+                    }).done(function(response) {
+                        handlePopup(response);
+                    });
+                }
+            });
+        }
+        
+        document.querySelector('.close-redirect-ico').addEventListener('click', function() {
+            incrementViews();
+        });
+
+        document.querySelector('.geo-button').addEventListener('click', function() {
+            incrementViews();
+        });
+
+    };
+
+    return {
+        init: function($noConflict) {
+            // assign no conflict as global variable
+            $ = $noConflict;
+
+            handleInit();
+        },
+
+        getScriptUrl: function(route) {
+            var dir = document.querySelector('script[src*="app_script_tag.js"]').getAttribute('src');
+            var name = dir.split('/').pop();
+            dir = dir.replace('/' + name, '');
+            var full_url = dir.replace('js', route);
+
+            return full_url;
+        },
+
+        dismissSlick: function() {
+            var modalID = $(document).find('.isActive').data('id');
+            var expire = parseInt($('.Popup-Expire').text())*60*1000;
+            var type = $(document).find('.isActive').children('.slickWindow').data('type');
+
+            if (type == 'fullpage-video') {
+                $('#Video-IFrame').attr('src', '');
+            }
+
+            $(document).find('.slickModal.isActive').removeClass('isActive')
+                .children('.slickOverlay').removeClass('slideBottom')
+                .siblings('.slickWindow:not(.hidden)').removeClass('slideBottom');
+
+            clearInterval(stopWatch);
+            GeoTools.createCookie('ppkcookie-'+modalID, true, expire);
+            GeoTools.createCookie('sub_popup', modalID, expire);
+
+        },
+
+        add: function() {
+            seconds++;
+        },
+
+        timer: function() {
+            stopWatch = setInterval(GeoTools.add, 1000);
+        },
+
+        copyToClipboard: function(element) {
+            var $temp = $('<input>');
+            $('body').append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand('copy');
+            $temp.remove();
+        },
+
+        showSubscribedNotice: function() {
+            loadScript('//cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.11.0/alertify.min.js', function() {
+                $('head').append('<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.11.0/css/alertify.min.css">');
+                $('head').append('<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.11.0/css/themes/default.min.css">');
+
+                setTimeout(function() {
+                    if (!$('.alertify-notifier').length) {
+                        alertify.success('Thanks for subscribing');
+                    }
+
+                    GeoTools.createCookie('subscribed', true, -1000);
+                }, 1000);
+            });
+        },
+
+        getFullLocation: function(locationData) {
+            var location = '';
+
+            if (typeof locationData !== 'undefined' && locationData.city) {
+                location = locationData.city;
+            }
+
+            if (typeof locationData !== 'undefined' && locationData.region_name) {
+                if (location) {
+                    location = location + ', ' + locationData.region_name;
+                } else {
+                    location = locationData.region_name;
+                }
+            }
+
+            if (typeof locationData !== 'undefined' && locationData.country_full) {
+                if (location) {
+                    location = location + ', ' + locationData.country_full;
+                } else {
+                    location = locationData.country_full;
+                }
+            }
+
+            return location;
+        },
+
+        findInArray: function(array, value) {
+            if (array.indexOf) {
+                if (array.indexOf(value) == -1) {
+                    return array.indexOf(parseInt(value));
+                }
+
+                return array.indexOf(value);
+            }
+
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] == value) return i;
+            }
+
+            return -1;
+        },
+
+        getCountryLocation: function(locationData) {
+            var location = '';
+
+            if (locationData.country_full) {
+                location = locationData.country_full;
+
+            } else if (locationData.country_name) {
+                location = locationData.country_name;
+            }
+
+            return location;
+        },
+
+        getStateLocation: function(locationData) {
+            var location = '';
+
+            if (locationData.region_name) {
+                location = locationData.region_name;
+            }
+
+            return location;
+        },
+
+        getCityLocation: function(locationData) {
+            var location = '';
+
+            if (locationData.city) {
+                location = locationData.city;
+            }
+
+            return location;
+        },
+
+        getUrlParameter: function(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        },
+
+        replaceAll: function(str, find, replace) {
+            return str.replace(new RegExp(find, 'g'), replace);
+        },
+
+        sendGoogleEvent: function(action, category, label) {
+            if (typeof window.ga !== 'undefined') {
+                ga('send', 'event', category, action, label);
+            }
+        },
+
+        createCookie: function(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days));
+                expires = "; expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + expires + "; path=/";
+            }
+        },
+
+        readCookie: function(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+
+            return null;
+        },
+
+        isMobileDevice: function() {
+            (function(a){($.browser=$.browser||{}).mobile=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))})(navigator.userAgent||navigator.vendor||window.opera);
+
+            return $.browser.mobile;
+        }
+    };
+
+}();
+
+var loadScript = function(url, callback) {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+
+    // If the browser is Internet Explorer.
+    if (script.readyState) {
+        script.onreadystatechange = function() {
+            if (script.readyState == "loaded" || script.readyState == "complete") {
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+        // For any other browser.
+    } else {
+        script.onload = function() {
+            callback();
+        };
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+};
+
+if (typeof jQuery === 'undefined') {
+    loadScript('//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js', function() {
+        jQuery223 = jQuery.noConflict(true);
+
+        console.log(jQuery223.fn.jquery + 'no_conflict');
+
+        GeoTools.init(jQuery223);
+    });
+} else {
+    GeoTools.init(jQuery);
+}
